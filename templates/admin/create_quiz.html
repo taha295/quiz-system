@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Create New Quiz</h1>
+
+<form method="post">
+  <div class="mb-3">
+    <label class="form-label">Quiz Title</label>
+    <input type="text" class="form-control" name="title" required>
+    <div class="form-text">Give your quiz a descriptive title.</div>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Create Quiz</button>
+  <a href="{{ url_for('admin') }}" class="btn btn-link">Cancel</a>
+</form>
+{% endblock %}

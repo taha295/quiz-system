@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center">
+  <h1>Add Question</h1>
+  <div>
+    <a href="{{ url_for('edit_quiz', quiz_id=quiz.id) }}" class="btn btn-outline-secondary">Back to Quiz</a>
+  </div>
+</div>
+
+<h4 class="mb-4">Quiz: {{ quiz.title }}</h4>
+
+<form method="post">
+  <div class="mb-3">
+    <label class="form-label">Question Text</label>
+    <input type="text" class="form-control" name="text" required>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Answer Choices</label>
+    {% for i in range(4) %}
+      <div class="input-group mb-2">
+        <span class="input-group-text">{{ (65 + i) | chr }}</span>
+        <input type="text" class="form-control" name="choice_{{ i }}" required>
+        <div class="input-group-text">
+          <input class="form-check-input mt-0" type="radio" name="correct" value="{{ i }}" required>
+          <span class="ms-2">Correct</span>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <button type="submit" class="btn btn-primary">Add Question</button>
+  <a href="{{ url_for('edit_quiz', quiz_id=quiz.id) }}" class="btn btn-link">Cancel</a>
+</form>
+{% endblock %}

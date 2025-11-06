@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Available Quizzes</h1>
+  {% if quizzes %}
+    <ul class="list-group">
+      {% for q in quizzes %}
+        <li class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <strong>{{ q.title }}</strong>
+            <div class="text-muted">Questions: {{ q.questions|length }}</div>
+          </div>
+          <div>
+            <a class="btn btn-sm btn-primary" href="{{ url_for('take_quiz', quiz_id=q.id) }}">Take</a>
+          </div>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No quizzes yet. <a href="{{ url_for('admin') }}">Create one</a>.</p>
+  {% endif %}
+{% endblock %}

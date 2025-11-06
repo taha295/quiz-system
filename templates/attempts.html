@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Recent Attempts</h1>
+  {% if attempts %}
+    <table class="table">
+      <thead><tr><th>ID</th><th>Quiz</th><th>Score</th><th>Actions</th></tr></thead>
+      <tbody>
+        {% for a in attempts %}
+          <tr>
+            <td>{{ a.id }}</td>
+            <td>{{ (a.quiz.title if a.quiz is defined else a.quiz_id) }}</td>
+            <td>{{ a.score }} / {{ a.total }}</td>
+            <td><a class="btn btn-sm btn-outline-primary" href="{{ url_for('result', attempt_id=a.id) }}">View</a></td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No attempts yet.</p>
+  {% endif %}
+{% endblock %}

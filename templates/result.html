@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block content %}
+  <h1>Result: {{ quiz.title }}</h1>
+  <p class="lead">Score: <strong>{{ attempt.score }} / {{ attempt.total }}</strong> ({{ (attempt.score / attempt.total * 100) | round(2) }}%)</p>
+
+  <hr>
+  <h3>Details</h3>
+  <ol>
+    {% for d in detail %}
+      <li>
+        <p><strong>{{ d.text }}</strong></p>
+        <ul>
+          {% for choice in d.choices %}
+            <li
+              {% if loop.index0 == d.correct %} class="text-success"{% endif %}
+              {% if loop.index0 == d.user and loop.index0 != d.correct %} class="text-danger"{% endif %}
+            >
+              {{ choice }}
+              {% if loop.index0 == d.correct %} &mdash; correct{% endif %}
+              {% if loop.index0 == d.user and loop.index0 != d.correct %} &mdash; your answer{% endif %}
+            </li>
+          {% endfor %}
+        </ul>
+      </li>
+    {% endfor %}
+  </ol>
+{% endblock %}
